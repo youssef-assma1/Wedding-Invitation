@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>يوسف وأسماء</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;500;600&family=Reem+Kufi:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon-deep:#3a060d;
+    --maroon-mid:#63121f;
+    --maroon-line: rgba(184,137,79,0.55);
+    --gold:#b8894f;
+    --gold-light:#e0c08a;
+    --gold-dark:#8a5a26;
+    --cream:#f7ecd9;
+    --cream-2:#f0dcc0;
+    --ink:#3a2415;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+
+  body{
+    background: radial-gradient(circle at 50% -10%, #4a0e17 0%, var(--maroon-deep) 55%, #1c0306 100%);
+    font-family:'Cairo', sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+    overflow-x:hidden;
+  }
+
+  .mote{
+    position:fixed;
+    border-radius:50%;
+    background: var(--gold-light);
+    opacity:0.10;
+    filter:blur(1px);
+    animation: float 14s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes float{
+    0%,100%{ transform: translateY(0) translateX(0); }
+    50%{ transform: translateY(-24px) translateX(10px); }
+  }
+
+  .card{
+    position:relative;
+    width:100%;
+    max-width:460px;
+    background: var(--cream);
+    border-radius:8px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(184,137,79,0.3);
+    overflow:hidden;
+    opacity:0;
+    transform: translateY(24px) scale(0.985);
+    animation: rise 1s cubic-bezier(.19,1,.22,1) forwards;
+  }
+  @keyframes rise{
+    to{ opacity:1; transform: translateY(0) scale(1); }
+  }
+
+  /* ---- hero: photo, with names set into its blank archway ---- */
+  .hero{
+    position:relative;
+    width:100%;
+    aspect-ratio: 768 / 1354;
+    overflow:hidden;
+  }
+  .hero img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position: top center;
+    display:block;
+  }
+
+  .hero .bismillah{
+    position:absolute;
+    top:29.5%;
+    left:0; right:0;
+    text-align:center;
+    font-family:'Reem Kufi', sans-serif;
+    color:var(--gold-dark);
+    font-size:13px;
+    letter-spacing:0.6px;
+    opacity:0.92;
+  }
+
+  .hero .names{
+    position:absolute;
+    top:35%;
+    left:0; right:0;
+    text-align:center;
+  }
+  .hero .names .name{
+    font-family:'Aref Ruqaa', serif;
+    font-weight:700;
+    font-size:clamp(30px, 8.6vw, 40px);
+    color:var(--maroon-deep);
+    line-height:1.22;
+    display:block;
+  }
+  .hero .names .amp{
+    font-family:'Aref Ruqaa', serif;
+    color:var(--gold-dark);
+    font-size:19px;
+    display:block;
+    margin:1px 0;
+    position:relative;
+  }
+  .hero .names .amp:before,
+  .hero .names .amp:after{
+    content:'';
+    position:absolute;
+    top:50%;
+    width:26px;
+    height:1px;
+    background: var(--maroon-line);
+  }
+  .hero .names .amp:before{ right:calc(50% + 18px); }
+  .hero .names .amp:after{ left:calc(50% + 18px); }
+
+  /* ---- info panel below the photo ---- */
+  .panel{
+    position:relative;
+    padding:30px 26px 30px;
+    border-top:1px solid var(--maroon-line);
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin:0 0 20px;
+  }
+  .divider .line{
+    height:1px;
+    width:36px;
+    background:var(--maroon-line);
+  }
+  .divider .motif{
+    color:var(--gold-dark);
+    font-size:13px;
+  }
+
+  .ayah{
+    text-align:center;
+    font-family:'Aref Ruqaa', serif;
+    font-size:19px;
+    line-height:1.9;
+    color:var(--maroon-mid);
+    margin:0 0 24px;
+    padding:0 4px;
+  }
+
+  .details{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    margin-bottom:24px;
+  }
+  .detail-row{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    gap:4px;
+  }
+  .detail-row .label{
+    font-family:'Reem Kufi', sans-serif;
+    font-size:11px;
+    letter-spacing:1.6px;
+    color:var(--gold-dark);
+    text-transform:uppercase;
+  }
+  .detail-row .value{
+    font-size:17px;
+    font-weight:600;
+    color:var(--maroon-deep);
+    line-height:1.6;
+  }
+  .detail-row .sub{
+    font-size:13.5px;
+    color:#7a5e4c;
+    font-weight:400;
+  }
+
+  .cta{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background: linear-gradient(135deg, var(--maroon-mid), var(--maroon-deep));
+    color: var(--cream);
+    font-family:'Cairo', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    padding:14px 20px;
+    border-radius:4px;
+    letter-spacing:0.3px;
+    box-shadow:0 8px 22px rgba(58,6,13,0.35);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .cta:hover{ transform: translateY(-2px); box-shadow:0 12px 28px rgba(58,6,13,0.45); }
+  .cta:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+  .cta .icon{ margin-inline-start:8px; }
+
+  /* ---- music toggle ---- */
+  .music-row{
+    display:flex;
+    justify-content:center;
+    margin-top:20px;
+  }
+  .music-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: transparent;
+    border:1px solid var(--maroon-line);
+    color:var(--maroon-mid);
+    font-family:'Cairo', sans-serif;
+    font-size:13px;
+    font-weight:500;
+    padding:9px 16px;
+    border-radius:999px;
+    cursor:pointer;
+    transition: background .2s ease, color .2s ease;
+  }
+  .music-btn:hover{ background: rgba(184,137,79,0.12); }
+  .music-btn .dot{
+    width:7px;height:7px;border-radius:50%;
+    background: var(--gold-dark);
+  }
+  .music-btn.playing .dot{
+    animation: pulse 1s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.4; transform:scale(1.4); }
+  }
+
+  .footer-note{
+    text-align:center;
+    margin-top:22px;
+    font-size:12.5px;
+    color:#8a6f5c;
+    letter-spacing:0.4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .card{ animation:none; opacity:1; transform:none; }
+    .mote{ animation:none; }
+  }
+
+  /* ---- cover screen ---- */
+  #coverScreen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:30;
+    transition: opacity .7s ease, visibility .7s ease;
+    overflow: hidden;
+  }
+  #coverScreen.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+  
+  #coverScreen .cover-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    z-index: 1;
+  }
+  
+  #coverScreen .cover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(58,6,13,0.4), rgba(28,3,6,0.85));
+    z-index: 2;
+  }
+
+  #coverScreen .cover-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+    text-align: center;
+    width: 100%;
+    max-width: 460px;
+    height: 100%;
+  }
+
+  #coverScreen .eyebrow{
+    font-family:'Reem Kufi', sans-serif;
+    color: var(--gold-light);
+    font-size: 15px;
+    letter-spacing: 2px;
+    margin-bottom: 220px;
+  }
+  
+  #coverScreen .cover-names-box {
+    position: absolute;
+    top: 38%;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+
+  #coverScreen .cover-names{
+    font-family:'Aref Ruqaa', serif;
+    color: var(--maroon-deep);
+    font-size: clamp(32px, 9vw, 44px);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  #coverScreen .cover-names .amp{
+    color: var(--gold-dark);
+    font-size: 19px;
+    display: block;
+    margin: 4px 0;
+  }
+
+  .open-btn{
+    position: absolute;
+    bottom: 60px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background: var(--cream);
+    border:1px solid var(--gold);
+    color: var(--maroon-deep);
+    font-family:'Cairo', sans-serif;
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:0.4px;
+    padding:14px 36px;
+    border-radius:999px;
+    cursor:pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transition: background .3s ease, transform .3s ease, box-shadow .3s ease;
+    z-index: 3;
+  }
+  .open-btn:hover{
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(184,137,79,0.5);
+  }
+  .open-btn:active{ transform: translateY(0); }
+  .open-btn:focus-visible{ outline:2px solid var(--gold-light); outline-offset:4px; }
+  .open-btn .ring{
+    width:7px;height:7px;
+    border-radius:50%;
+    background: var(--maroon-mid);
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+
+  #inviteScreen{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:32px 16px;
+    opacity:0;
+    transition: opacity .8s ease;
+  }
+  #inviteScreen.visible{ opacity:1; }
+
+  /* ---- message to the couple ---- */
+  .msg-section{
+    margin-top:26px;
+    padding-top:22px;
+    border-top:1px solid var(--maroon-line);
+  }
+  .msg-section .msg-title{
+    text-align:center;
+    font-family:'Aref Ruqaa', serif;
+    font-size:19px;
+    color:var(--maroon-deep);
+    margin:0 0 14px;
+  }
+  .msg-section input,
+  .msg-section textarea{
+    width:100%;
+    box-sizing:border-box;
+    font-family:'Cairo', sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    background:var(--cream-2);
+    border:1px solid var(--maroon-line);
+    border-radius:6px;
+    padding:11px 13px;
+    margin-bottom:10px;
+    resize:vertical;
+  }
+  .msg-section textarea{ min-height:90px; }
+  .msg-section input::placeholder,
+  .msg-section textarea::placeholder{ color:#a3876f; }
+  .msg-btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    background: linear-gradient(135deg, var(--maroon-mid), var(--maroon-deep));
+    color: var(--cream);
+    font-family:'Cairo', sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    padding:12px 18px;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+    transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+  }
+  .msg-btn:hover{ transform: translateY(-2px); }
+  .msg-btn:disabled{ opacity:0.6; cursor:default; transform:none; }
+  .msg-status{
+    text-align:center;
+    font-size:13.5px;
+    margin-top:10px;
+    min-height:16px;
+    color:var(--maroon-mid);
+    font-weight:600;
+  }
+</style>
+</head>
+<body>
+
+<!-- شاشة الواجهة الأولى (صورة الغلاف photo1.jpg) -->
+<div id="coverScreen">
+  <img src="Photo22.jpeg" alt="صورة الغلاف" class="cover-bg">
+  <div class="cover-overlay"></div>
+  
+  <div class="cover-content">
+    <p class="eyebrow">دعوة زفاف مباركة</p>
+    <div class="cover-names-box">
+      <h1 class="cover-names">يُوسُف<span class="amp">و</span>أَسْمَاء</h1>
+    </div>
+    <button class="open-btn" id="openBtn" type="button">
+      <span class="ring"></span>
+      افتح الدعوة
+    </button>
+  </div>
+</div>
+
+<!-- صفحة الدعوة الرئيسية -->
+<div id="inviteScreen">
+
+<div class="mote" style="width:120px;height:120px; top:8%; left:6%;"></div>
+<div class="mote" style="width:80px;height:80px; bottom:12%; right:8%; animation-delay:3s;"></div>
+<div class="mote" style="width:60px;height:60px; top:60%; left:-2%; animation-delay:6s;"></div>
+
+<div class="card">
+
+  <!-- صورة الكارت الرئيسي (Gemini_Generated_Image...) -->
+  <div class="hero">
+    <img src="photo1.jpg" alt="صورة العروسين">
+    <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+    <div class="names">
+      <span class="name">يُوسُف</span>
+      <span class="amp">و</span>
+      <span class="name">أَسْمَاء</span>
+    </div>
+  </div>
+
+  <div class="panel">
+
+    <div class="divider">
+      <span class="line"></span><span class="motif">✦</span><span class="line"></span>
+    </div>
+
+    <p class="ayah">﴿ وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</p>
+
+    <div class="divider">
+      <span class="line"></span><span class="motif">✦</span><span class="line"></span>
+    </div>
+
+    <div class="details">
+      <div class="detail-row">
+        <span class="label">المكان</span>
+        <span class="value">بانوراما 6 أكتوبر</span>
+        <span class="sub">قاعة الماسة — صلاح سالم</span>
+      </div>
+      <div class="detail-row">
+        <span class="label">الموعد</span>
+        <span class="value">الأربعاء، 9 سبتمبر 2026</span>
+        <span class="sub">الساعة 8:00 مساءً</span>
+      </div>
+    </div>
+
+    <a class="cta" href="https://maps.app.goo.gl/bNy5sfxUNrCXYStA8" target="_blank" rel="noopener">
+      location <span class="icon">↝</span>
+    </a>
+
+    <div class="music-row">
+      <button class="music-btn" id="musicBtn" type="button">
+        <span class="dot"></span>
+        <span id="musicLabel"> موسيقى </span>
+      </button>
+    </div>
+    
+    <!-- عنصر الصوت المباشر (ضع رابط الأغنية من موقع Archive.org مكان النص) -->
+    <audio id="bgMusic" loop>
+      <source src="https://ia903203.us.archive.org/22/items/966530528941_202608/%D8%B2%D9%81%D8%A9%20%D8%A8%D9%85%D9%82%D8%AF%D9%85%D8%A9%20%D8%A7%D9%85%20%D9%83%D9%84%D8%AB%D9%88%D9%85%20%D9%8A%D8%A7%D8%B1%D8%A8...%D8%AA%D9%81%D8%B6%D9%84%20%D8%AD%D9%84%D8%A7%D8%A9%20%D8%A7%D9%88%D9%84%20%D9%84%D9%82%D8%A7%D8%A1%20%D9%81%D9%8A%20%D8%A7%D9%8A%D8%AF%D9%8A%D9%86%D8%A7%20%D9%84%D8%B7%D9%84%D8%A8966530528941.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="msg-section">
+      <p class="msg-title">اكتب رسالة للعروسين</p>
+      <form id="msgForm">
+        <input type="text" id="msgName" placeholder="اسمك" required>
+        <textarea id="msgText" placeholder="اكتب رسالتك هنا..." required></textarea>
+        <button class="msg-btn" id="msgSubmit" type="submit">إرسال الرسالة</button>
+      </form>
+      <p class="msg-status" id="msgStatus"></p>
+    </div>
+
+    <p class="footer-note">بحضوركم تكتمل فرحتنا</p>
+
+  </div>
+
+</div>
+</div>
+
+<script>
+  const btn = document.getElementById('musicBtn');
+  const label = document.getElementById('musicLabel');
+  const coverScreen = document.getElementById('coverScreen');
+  const inviteScreen = document.getElementById('inviteScreen');
+  const openBtn = document.getElementById('openBtn');
+  const audioPlayer = document.getElementById('bgMusic');
+
+  function setPlayingUI(playing){
+    if (playing) {
+      btn.classList.add('playing');
+      label.textContent = 'إيقاف الموسيقى';
+    } else {
+      btn.classList.remove('playing');
+      label.textContent = 'تشغيل موسيقى';
+    }
+  }
+
+  // فتح الدعوة وبدء تشغيل الموسيقى تلقائياً
+  openBtn.addEventListener('click', () => {
+    coverScreen.classList.add('hidden');
+    inviteScreen.classList.add('visible');
+    
+    audioPlayer.play().then(() => {
+      setPlayingUI(true);
+    }).catch((err) => {
+      console.log("Autoplay prevented:", err);
+      setPlayingUI(false);
+    });
+  });
+
+  // التحكم في الموسيقى من الزر السفلي
+  btn.addEventListener('click', () => {
+    if (audioPlayer.paused) {
+      audioPlayer.play().then(() => {
+        setPlayingUI(true);
+      });
+    } else {
+      audioPlayer.pause();
+      setPlayingUI(false);
+    }
+  });
+
+  audioPlayer.addEventListener('play', () => setPlayingUI(true));
+  audioPlayer.addEventListener('pause', () => setPlayingUI(false));
+
+  // ---- guest message form ----
+  const MSG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyzBRa5gR77rBHiqK99d1-IddxYiQuI0dXXB-MnBqqkTDU9hofSSGtPaN-SqlneHIbsDw/exec';
+
+  const msgForm = document.getElementById('msgForm');
+  const msgName = document.getElementById('msgName');
+  const msgText = document.getElementById('msgText');
+  const msgSubmit = document.getElementById('msgSubmit');
+  const msgStatus = document.getElementById('msgStatus');
+
+  msgForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = msgName.value.trim();
+    const message = msgText.value.trim();
+    if (!name || !message) return;
+
+    msgSubmit.disabled = true;
+    msgSubmit.textContent = 'جاري الإرسال...';
+    msgStatus.textContent = '';
+
+    fetch(MSG_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ name: name, message: message })
+    })
+      .then(function () {
+        msgStatus.textContent = 'تم إرسال رسالتك، شكرًا لكم 🌸';
+        msgForm.reset();
+      })
+      .catch(function () {
+        msgStatus.textContent = 'حصلت مشكلة في الإرسال، حاول تاني.';
+      })
+      .finally(function () {
+        msgSubmit.disabled = false;
+        msgSubmit.textContent = 'إرسال الرسالة';
+      });
+  });
+</script>
+
+</body>
+</html>
