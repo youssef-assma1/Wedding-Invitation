@@ -497,12 +497,9 @@
     <div class="msg-section">
       <p class="msg-title">اكتب رسالة للعروسين</p>
       
-      <!-- إطار خفي لمنع إعادة تحميل الصفحة -->
-      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.finishedMsg();}"></iframe>
-
-      <form id="msgForm" action="https://script.google.com/macros/s/AKfycbzywvKYnBM6O717rpy1-r_c1kqpKQZnWFa8zIdPFiMro6geFCcOKwpgmdFu4dmceL0_/exec" method="POST" target="hidden_iframe">
-        <input type="text" name="name" id="msgName" placeholder="اسمك" required>
-        <textarea name="message" id="msgText" placeholder="اكتب رسالتك هنا..." required></textarea>
+      <form id="msgForm">
+        <input type="text" id="msgName" placeholder="اسمك" required>
+        <textarea id="msgText" placeholder="اكتب رسالتك هنا..." required></textarea>
         <button class="msg-btn" id="msgSubmit" type="submit">إرسال الرسالة</button>
       </form>
       <p class="msg-status" id="msgStatus"></p>
@@ -553,7 +550,7 @@
   audioPlayer.addEventListener('play', () => setPlayingUI(true));
   audioPlayer.addEventListener('pause', () => setPlayingUI(false));
 
-  window.submitted = false;
+  // ---- إرسال الرسالة مباشرة على الايميل الخاص بك ----
   const msgForm = document.getElementById('msgForm');
   const msgName = document.getElementById('msgName');
   const msgText = document.getElementById('msgText');
@@ -561,25 +558,30 @@
   const msgStatus = document.getElementById('msgStatus');
 
   msgForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
     const name = msgName.value.trim();
     const message = msgText.value.trim();
     if (!name || !message) return;
 
-    window.submitted = true;
     msgSubmit.disabled = true;
-    msgSubmit.textContent = 'جاري الإرسال...';
-    msgStatus.textContent = '';
-  });
+    msgSubmit.textContent = 'جاري التجهيز...';
 
-  function finishedMsg() {
-    if (window.submitted) {
-      msgStatus.textContent = 'تم إرسال رسالتك بنجاح 🌸';
-      msgForm.reset();
+    const myEmail = "aantounyouss@gmail.com";
+    const subject = encodeURIComponent("رسالة تهنئة زفاف من: " + name);
+    const body = encodeURIComponent("الاسم: " + name + "\n\nالرسالة:\n" + message);
+
+    // فتح تطبيق البريد لإرسال الرسالة مباشرة لإيميلك
+    window.location.href = `mailto:${myEmail}?subject=${subject}&body=${body}`;
+
+    msgStatus.textContent = 'تم تجهيز البريد لإرسال رسالتك، شكرًا لك 🌸';
+    msgForm.reset();
+
+    setTimeout(() => {
       msgSubmit.disabled = false;
       msgSubmit.textContent = 'إرسال الرسالة';
-      window.submitted = false;
-    }
-  }
+    }, 2000);
+  });
 </script>
 
 </body>
