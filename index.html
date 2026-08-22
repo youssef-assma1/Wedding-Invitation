@@ -426,6 +426,9 @@
 </head>
 <body>
 
+<!-- إطار خفي لمنع إعادة تحميل الصفحة أو ظهور أخطاء CORS -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(isSubmitted){submittedMessage()}"></iframe>
+
 <div id="coverScreen">
   <img src="Photo22.jpeg" alt="صورة الغلاف" class="cover-bg">
   <div class="cover-overlay"></div>
@@ -497,14 +500,15 @@
     </div>
     
     <audio id="bgMusic" loop>
-      <source src="https://ia903203.us.archive.org/22/items/966530528941_202608/%D8%B2%D9%81%D8%A9%20%D8%A8%D9%85%D9%82%D8%AF%D9%85%D8%A9%20%D8%A7%D9%85%20%D9%83%D9%84%D8%AB%D9%88%D9%85%20%D9%8A%D8%A7%D8%B1%D8%A8...%D8%AA%D9%81%D8%B6%D9%84%20%D8%AD%D9%84%D8%A7%D8%A9%20%D8%A7%D9%88%D9%84%20%D9%84%D9%82%D8%A7%D8%A1%20%D9%81%D9%8A%20%D8%A7%D9%8A%D8%AF%D9%8A%D9%86%D8%A7%20%D9%84%D8%B7%D9%84%D8%A8966530528941.mp3" type="audio/mpeg">
+      <source src="https://ia903203.us.archive.org/22/items/966530528941_202608/%D8%B2%D9%81%D8%A9%20%D8%A8%D9%85%D9%82%D8%AF%D9%85%D8%A9%20%D8%A7%D9%85%20%D9%83%D9%84%D8%AB%D9%88%D9%85%20%D9%8A%D8%A7%D8%B8...%D8%AA%D9%81%D8%B6%D9%84%20%D8%AD%D9%84%D8%A7%D8%A9%20%D8%A7%D9%88%D9%84%20%D9%84%D9%82%D8%A7%D8%A1%20%D9%81%D9%8A%20%D8%A7%D9%8A%D8%AF%D9%8A%D9%86%D8%A7%20%D9%84%D8%B7%D9%84%D8%A8966530528941.mp3" type="audio/mpeg">
     </audio>
 
     <div class="msg-section">
       <p class="msg-title">اكتب رسالة للعروسين</p>
-      <form id="msgForm">
-        <input type="text" id="msgName" placeholder="اسمك" required>
-        <textarea id="msgText" placeholder="اكتب رسالتك هنا..." required></textarea>
+      <!-- تم توجيه الفورم المباشر عبر الـ Iframe الخفي -->
+      <form id="msgForm" action="https://script.google.com/macros/s/AKfycbz1CjUfbEj4gvUmjGa_OPCRuKbAefePhFztFH_R-YCLckolFN3Jep1ph3sG-f1NDV8/exec" method="POST" target="hidden_iframe">
+        <input type="text" name="name" id="msgName" placeholder="اسمك" required>
+        <textarea name="message" id="msgText" placeholder="اكتب رسالتك هنا..." required></textarea>
         <button class="msg-btn" id="msgSubmit" type="submit">إرسال الرسالة</button>
       </form>
       <p class="msg-status" id="msgStatus"></p>
@@ -560,45 +564,31 @@
   audioPlayer.addEventListener('play', () => setPlayingUI(true));
   audioPlayer.addEventListener('pause', () => setPlayingUI(false));
 
-  const MSG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz1CjUfbEj4gvUmjGa_OPCRuKbAefePhFztFH_R-YCLckolFN3Jep1ph3sG-f1NDV8/exec';
-
+  let isSubmitted = false;
   const msgForm = document.getElementById('msgForm');
   const msgName = document.getElementById('msgName');
   const msgText = document.getElementById('msgText');
   const msgSubmit = document.getElementById('msgSubmit');
   const msgStatus = document.getElementById('msgStatus');
 
-  msgForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-
+  msgForm.addEventListener('submit', function () {
     const name = msgName.value.trim();
     const message = msgText.value.trim();
     if (!name || !message) return;
 
+    isSubmitted = true;
     msgSubmit.disabled = true;
     msgSubmit.textContent = 'جاري الإرسال...';
     msgStatus.textContent = '';
-
-    fetch(MSG_ENDPOINT, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ name: name, message: message })
-    })
-    .then(function () {
-      // بما أن no-cors لا يقرأ الرد، نعتبر الإرسال تم بنجاح فور وصول الطلب للشير
-      msgStatus.textContent = 'تم إرسال رسالتك، شكرًا لكم 🌸';
-      msgForm.reset();
-    })
-    .catch(function () {
-      msgStatus.textContent = 'تم إرسال رسالتك بنجاح 🌸';
-      msgForm.reset();
-    })
-    .finally(function () {
-      msgSubmit.disabled = false;
-      msgSubmit.textContent = 'إرسال الرسالة';
-    });
   });
+
+  function submittedMessage() {
+    msgStatus.textContent = 'تم إرسال رسالتك، 🌸';
+    msgForm.reset();
+    msgSubmit.disabled = false;
+    msgSubmit.textContent = 'إرسال الرسالة';
+    isSubmitted = false;
+  }
 </script>
 
 </body>
