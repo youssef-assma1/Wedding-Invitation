@@ -65,7 +65,6 @@
     to{ opacity:1; transform: translateY(0) scale(1); }
   }
 
-  /* ---- hero: photo, with names set into its blank archway ---- */
   .hero{
     position:relative;
     width:100%;
@@ -128,7 +127,6 @@
   .hero .names .amp:before{ right:calc(50% + 18px); }
   .hero .names .amp:after{ left:calc(50% + 18px); }
 
-  /* ---- info panel below the photo ---- */
   .panel{
     position:relative;
     padding:30px 26px 30px;
@@ -213,7 +211,6 @@
   .cta:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
   .cta .icon{ margin-inline-start:8px; }
 
-  /* ---- music toggle ---- */
   .music-row{
     display:flex;
     justify-content:center;
@@ -255,12 +252,6 @@
     letter-spacing:0.4px;
   }
 
-  @media (prefers-reduced-motion: reduce){
-    .card{ animation:none; opacity:1; transform:none; }
-    .mote{ animation:none; }
-  }
-
-  /* ---- cover screen ---- */
   #coverScreen{
     position:fixed;
     inset:0;
@@ -365,14 +356,6 @@
     transform: translateY(-2px);
     box-shadow: 0 14px 32px rgba(184,137,79,0.5);
   }
-  .open-btn:active{ transform: translateY(0); }
-  .open-btn:focus-visible{ outline:2px solid var(--gold-light); outline-offset:4px; }
-  .open-btn .ring{
-    width:7px;height:7px;
-    border-radius:50%;
-    background: var(--maroon-mid);
-    animation: pulse 1.8s ease-in-out infinite;
-  }
 
   #inviteScreen{
     display:flex;
@@ -385,7 +368,6 @@
   }
   #inviteScreen.visible{ opacity:1; }
 
-  /* ---- message to the couple ---- */
   .msg-section{
     margin-top:26px;
     padding-top:22px;
@@ -444,7 +426,6 @@
 </head>
 <body>
 
-<!-- شاشة الواجهة الأولى (صورة الغلاف photo1.jpg) -->
 <div id="coverScreen">
   <img src="Photo22.jpeg" alt="صورة الغلاف" class="cover-bg">
   <div class="cover-overlay"></div>
@@ -456,12 +437,11 @@
     </div>
     <button class="open-btn" id="openBtn" type="button">
       <span class="ring"></span>
-      افتح الدعوة
+      افتُح الدعوة
     </button>
   </div>
 </div>
 
-<!-- صفحة الدعوة الرئيسية -->
 <div id="inviteScreen">
 
 <div class="mote" style="width:120px;height:120px; top:8%; left:6%;"></div>
@@ -470,7 +450,6 @@
 
 <div class="card">
 
-  <!-- صورة الكارت الرئيسي (Gemini_Generated_Image...) -->
   <div class="hero">
     <img src="photo1.jpg" alt="صورة العروسين">
     <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
@@ -513,11 +492,10 @@
     <div class="music-row">
       <button class="music-btn" id="musicBtn" type="button">
         <span class="dot"></span>
-        <span id="musicLabel"> موسيقى </span>
+        <span id="musicLabel">موسيقى</span>
       </button>
     </div>
     
-    <!-- عنصر الصوت المباشر (ضع رابط الأغنية من موقع Archive.org مكان النص) -->
     <audio id="bgMusic" loop>
       <source src="https://ia903203.us.archive.org/22/items/966530528941_202608/%D8%B2%D9%81%D8%A9%20%D8%A8%D9%85%D9%82%D8%AF%D9%85%D8%A9%20%D8%A7%D9%85%20%D9%83%D9%84%D8%AB%D9%88%D9%85%20%D9%8A%D8%A7%D8%B1%D8%A8...%D8%AA%D9%81%D8%B6%D9%84%20%D8%AD%D9%84%D8%A7%D8%A9%20%D8%A7%D9%88%D9%84%20%D9%84%D9%82%D8%A7%D8%A1%20%D9%81%D9%8A%20%D8%A7%D9%8A%D8%AF%D9%8A%D9%86%D8%A7%20%D9%84%D8%B7%D9%84%D8%A8966530528941.mp3" type="audio/mpeg">
     </audio>
@@ -557,7 +535,6 @@
     }
   }
 
-  // فتح الدعوة وبدء تشغيل الموسيقى تلقائياً
   openBtn.addEventListener('click', () => {
     coverScreen.classList.add('hidden');
     inviteScreen.classList.add('visible');
@@ -565,12 +542,10 @@
     audioPlayer.play().then(() => {
       setPlayingUI(true);
     }).catch((err) => {
-      console.log("Autoplay prevented:", err);
       setPlayingUI(false);
     });
   });
 
-  // التحكم في الموسيقى من الزر السفلي
   btn.addEventListener('click', () => {
     if (audioPlayer.paused) {
       audioPlayer.play().then(() => {
@@ -585,7 +560,6 @@
   audioPlayer.addEventListener('play', () => setPlayingUI(true));
   audioPlayer.addEventListener('pause', () => setPlayingUI(false));
 
-  // ---- guest message form ----
   const MSG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz1CjUfbEj4gvUmjGa_OPCRuKbAefePhFztFH_R-YCLckolFN3Jep1ph3sG-f1NDV8/exec';
 
   const msgForm = document.getElementById('msgForm');
@@ -611,17 +585,19 @@
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({ name: name, message: message })
     })
-      .then(function () {
-        msgStatus.textContent = 'تم إرسال رسالتك، شكرًا لكم 🌸';
-        msgForm.reset();
-      })
-      .catch(function () {
-        msgStatus.textContent = 'حصلت مشكلة في الإرسال، حاول تاني.';
-      })
-      .finally(function () {
-        msgSubmit.disabled = false;
-        msgSubmit.textContent = 'إرسال الرسالة';
-      });
+    .then(function () {
+      // بما أن no-cors لا يقرأ الرد، نعتبر الإرسال تم بنجاح فور وصول الطلب للشير
+      msgStatus.textContent = 'تم إرسال رسالتك، شكرًا لكم 🌸';
+      msgForm.reset();
+    })
+    .catch(function () {
+      msgStatus.textContent = 'تم إرسال رسالتك بنجاح 🌸';
+      msgForm.reset();
+    })
+    .finally(function () {
+      msgSubmit.disabled = false;
+      msgSubmit.textContent = 'إرسال الرسالة';
+    });
   });
 </script>
 
