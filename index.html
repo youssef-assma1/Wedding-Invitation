@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>يوسف وأسماء</title>
+<title>💍 حفل زفاف يوسف وأسماء </title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;500;600&family=Reem+Kufi:wght@400;500&display=swap" rel="stylesheet">
@@ -65,7 +65,6 @@
     to{ opacity:1; transform: translateY(0) scale(1); }
   }
 
-  /* ---- hero: photo, with names set into its blank archway ---- */
   .hero{
     position:relative;
     width:100%;
@@ -128,7 +127,6 @@
   .hero .names .amp:before{ right:calc(50% + 18px); }
   .hero .names .amp:after{ left:calc(50% + 18px); }
 
-  /* ---- info panel below the photo ---- */
   .panel{
     position:relative;
     padding:30px 26px 30px;
@@ -213,7 +211,6 @@
   .cta:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
   .cta .icon{ margin-inline-start:8px; }
 
-  /* ---- music toggle ---- */
   .music-row{
     display:flex;
     justify-content:center;
@@ -255,12 +252,6 @@
     letter-spacing:0.4px;
   }
 
-  @media (prefers-reduced-motion: reduce){
-    .card{ animation:none; opacity:1; transform:none; }
-    .mote{ animation:none; }
-  }
-
-  /* ---- cover screen ---- */
   #coverScreen{
     position:fixed;
     inset:0;
@@ -365,15 +356,7 @@
     transform: translateY(-2px);
     box-shadow: 0 14px 32px rgba(184,137,79,0.5);
   }
-  .open-btn:active{ transform: translateY(0); }
-  .open-btn:focus-visible{ outline:2px solid var(--gold-light); outline-offset:4px; }
-  .open-btn .ring{
-    width:7px;height:7px;
-    border-radius:50%;
-    background: var(--maroon-mid);
-    animation: pulse 1.8s ease-in-out infinite;
-  }
-
+  
   #inviteScreen{
     display:flex;
     align-items:center;
@@ -385,7 +368,6 @@
   }
   #inviteScreen.visible{ opacity:1; }
 
-  /* ---- message to the couple ---- */
   .msg-section{
     margin-top:26px;
     padding-top:22px;
@@ -444,11 +426,9 @@
 </head>
 <body>
 
-<!-- شاشة الواجهة الأولى (صورة الغلاف photo1.jpg) -->
 <div id="coverScreen">
   <img src="Photo22.jpeg" alt="صورة الغلاف" class="cover-bg">
   <div class="cover-overlay"></div>
-  
   <div class="cover-content">
     <p class="eyebrow">دعوة زفاف مباركة</p>
     <div class="cover-names-box">
@@ -461,16 +441,12 @@
   </div>
 </div>
 
-<!-- صفحة الدعوة الرئيسية -->
 <div id="inviteScreen">
-
 <div class="mote" style="width:120px;height:120px; top:8%; left:6%;"></div>
 <div class="mote" style="width:80px;height:80px; bottom:12%; right:8%; animation-delay:3s;"></div>
 <div class="mote" style="width:60px;height:60px; top:60%; left:-2%; animation-delay:6s;"></div>
 
 <div class="card">
-
-  <!-- صورة الكارت الرئيسي (Gemini_Generated_Image...) -->
   <div class="hero">
     <img src="photo1.jpg" alt="صورة العروسين">
     <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
@@ -482,13 +458,10 @@
   </div>
 
   <div class="panel">
-
     <div class="divider">
       <span class="line"></span><span class="motif">✦</span><span class="line"></span>
     </div>
-
     <p class="ayah">﴿ وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</p>
-
     <div class="divider">
       <span class="line"></span><span class="motif">✦</span><span class="line"></span>
     </div>
@@ -517,25 +490,27 @@
       </button>
     </div>
     
-    <!-- عنصر الصوت المباشر (ضع رابط الأغنية من موقع Archive.org مكان النص) -->
     <audio id="bgMusic" loop>
-      <source src="https://ia903203.us.archive.org/22/items/966530528941_202608/%D8%B2%D9%81%D8%A9%20%D8%A8%D9%85%D9%82%D8%AF%D9%85%D8%A9%20%D8%A7%D9%85%20%D9%83%D9%84%D8%AB%D9%88%D9%85%20%D9%8A%D8%A7%D8%B1%D8%A8...%D8%AA%D9%81%D8%B6%D9%84%20%D8%AD%D9%84%D8%A7%D8%A9%20%D8%A7%D9%88%D9%84%20%D9%84%D9%82%D8%A7%D8%A1%20%D9%81%D9%8A%20%D8%A7%D9%8A%D8%AF%D9%8A%D9%86%D8%A7%20%D9%84%D8%B7%D9%84%D8%A8966530528941.mp3" type="audio/mpeg">
+      <source src="https://ia903203.us.archive.22/items/966530528941_202608/%D8%B2%D9%81%D8%A9%20%D8%A8%D9%85%D9%82%D8%AF%D9%85%D8%A9%20%D8%A7%D9%85%20%D9%83%D9%84%D8%AB%D9%88%D9%85%20%D9%8A%D8%A7%D8%B1%D8%A8...%D8%AA%D9%81%D8%B6%D9%84%20%D8%AD%D9%84%D8%A7%D8%A9%20%D8%A7%D9%88%D9%84%20%D9%84%D9%82%D8%A7%D8%A1%20%D9%81%D9%8A%20%D8%A7%D9%8A%D8%AF%D9%8A%D9%86%D8%A7%20%D9%84%D8%B7%D9%84%D8%A8966530528941.mp3" type="audio/mpeg">
     </audio>
 
     <div class="msg-section">
       <p class="msg-title">اكتب رسالة للعروسين</p>
-      <form id="msgForm">
-        <input type="text" id="msgName" placeholder="اسمك" required>
-        <textarea id="msgText" placeholder="اكتب رسالتك هنا..." required></textarea>
+      
+      <!-- إطار خفي لمنع إعادة تحميل الصفحة -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.finishedMsg();}"></iframe>
+
+      <!-- تم تغيير الـ action برابط الـ Web App الجديد الخاص بك -->
+      <form id="msgForm" action="https://script.google.com/macros/s/AKfycbyzBRa5gR77rBHiqK99d1-IddxYiQuI0dXXB-MnBqqkTDU9hofSSGtPaN-SqlneHIbsDw/exec" method="POST" target="hidden_iframe">
+        <input type="text" name="name" id="msgName" placeholder="اسمك" required>
+        <textarea name="message" id="msgText" placeholder="اكتب رسالتك هنا..." required></textarea>
         <button class="msg-btn" id="msgSubmit" type="submit">إرسال الرسالة</button>
       </form>
       <p class="msg-status" id="msgStatus"></p>
     </div>
 
     <p class="footer-note">بحضوركم تكتمل فرحتنا</p>
-
   </div>
-
 </div>
 </div>
 
@@ -557,25 +532,19 @@
     }
   }
 
-  // فتح الدعوة وبدء تشغيل الموسيقى تلقائياً
   openBtn.addEventListener('click', () => {
     coverScreen.classList.add('hidden');
     inviteScreen.classList.add('visible');
-    
     audioPlayer.play().then(() => {
       setPlayingUI(true);
-    }).catch((err) => {
-      console.log("Autoplay prevented:", err);
+    }).catch(() => {
       setPlayingUI(false);
     });
   });
 
-  // التحكم في الموسيقى من الزر السفلي
   btn.addEventListener('click', () => {
     if (audioPlayer.paused) {
-      audioPlayer.play().then(() => {
-        setPlayingUI(true);
-      });
+      audioPlayer.play().then(() => setPlayingUI(true));
     } else {
       audioPlayer.pause();
       setPlayingUI(false);
@@ -585,9 +554,8 @@
   audioPlayer.addEventListener('play', () => setPlayingUI(true));
   audioPlayer.addEventListener('pause', () => setPlayingUI(false));
 
-  // ---- guest message form ----
-  const MSG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwEk6R1eKqybWU-lMPAipVOVg-dKeGixbviLxHbrE38hjcTfxxh3fR5WW5zcqRyzMI/exec';
-
+  // نظام الإرسال المباشر بدون أخطاء CORS أو 401
+  window.submitted = false;
   const msgForm = document.getElementById('msgForm');
   const msgName = document.getElementById('msgName');
   const msgText = document.getElementById('msgText');
@@ -595,34 +563,25 @@
   const msgStatus = document.getElementById('msgStatus');
 
   msgForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-
     const name = msgName.value.trim();
     const message = msgText.value.trim();
     if (!name || !message) return;
 
+    window.submitted = true;
     msgSubmit.disabled = true;
     msgSubmit.textContent = 'جاري الإرسال...';
     msgStatus.textContent = '';
-
-    fetch(MSG_ENDPOINT, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ name: name, message: message })
-    })
-      .then(function () {
-        msgStatus.textContent = 'تم إرسال رسالتك، شكرًا لكم 🌸';
-        msgForm.reset();
-      })
-      .catch(function () {
-        msgStatus.textContent = 'حصلت مشكلة في الإرسال، حاول تاني.';
-      })
-      .finally(function () {
-        msgSubmit.disabled = false;
-        msgSubmit.textContent = 'إرسال الرسالة';
-      });
   });
+
+  function finishedMsg() {
+    if (window.submitted) {
+      msgStatus.textContent = 'تم إرسال رسالتك بنجاح 🌸';
+      msgForm.reset();
+      msgSubmit.disabled, msgSubmit.disabled = false;
+      msgSubmit.textContent = 'إرسال الرسالة';
+      window.submitted = false;
+    }
+  }
 </script>
 
 </body>
