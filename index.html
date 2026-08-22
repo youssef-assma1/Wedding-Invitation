@@ -501,7 +501,13 @@
       <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.finishedMsg();}"></iframe>
 
       <!-- تم تغيير الـ action برابط الـ Web App الجديد الخاص بك -->
-      <form id="msgForm" action="https://script.google.com/macros/s/AKfycbyzBRa5gR77rBHiqK99d1-IddxYiQuI0dXXB-MnBqqkTDU9hofSSGtPaN-SqlneHIbsDw/exec" method="POST" target="hidden_iframe">
+<div class="msg-section">
+      <p class="msg-title">اكتب رسالة للعروسين</p>
+      
+      <!-- إطار خفي لمنع إعادة تحميل الصفحة -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(window.submitted){window.finishedMsg();}"></iframe>
+
+      <form id="msgForm" action="https://script.google.com/macros/s/AKfycbzywvKYnBM6O717rpy1-r_c1kqpKQZnWFa8zIdPFiMro6geFCcOKwpgmdFu4dmceL0_/exec" method="POST" target="hidden_iframe">
         <input type="text" name="name" id="msgName" placeholder="اسمك" required>
         <textarea name="message" id="msgText" placeholder="اكتب رسالتك هنا..." required></textarea>
         <button class="msg-btn" id="msgSubmit" type="submit">إرسال الرسالة</button>
